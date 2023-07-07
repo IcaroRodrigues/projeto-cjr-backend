@@ -1,6 +1,5 @@
 import { createUserService, findUserByEmailService, hashPasswordService } from '../services/userService.js'
 
-
 export const createUserController = async (request, response) => {
 
   const { username, senha, gender, email, cargo } = request.body
@@ -27,7 +26,7 @@ export const createUserController = async (request, response) => {
 
   const user = await createUserService(userData)
 
-  // delete user.senha
+  delete user.senha
 
   return response.json(user)
 }
