@@ -1,4 +1,4 @@
-import { findUserByIdService, updateUserService } from '../services/userService.js'
+import { findUserByIdService, updateUserService } from '../../services/userService.js'
 
 export const updateUserController = async (request, response) => {
   const { username, gender, email, cargo } = request.body

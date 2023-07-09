@@ -1,4 +1,4 @@
-import { findAllUsersService } from '../services/userService.js'
+import { findAllUsersService } from '../../services/userService.js'
 
 export const findAllUserController = async (request, response) => {
   const users = await findAllUsersService()

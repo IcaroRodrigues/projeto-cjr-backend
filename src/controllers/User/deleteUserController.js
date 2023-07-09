@@ -1,4 +1,4 @@
-import { deleteUserByIdService, findUserByIdService } from '../services/userService.js'
+import { deleteUserByIdService, findUserByIdService } from '../../services/userService.js'
 
 export const deleteUserController = async (request, response) => {
   const { id } = request.params

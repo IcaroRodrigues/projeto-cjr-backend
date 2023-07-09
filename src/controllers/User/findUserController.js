@@ -1,4 +1,4 @@
-import { findUserByIdService } from '../services/userService.js'
+import { findUserByIdService } from '../../services/userService.js'
 
 export const findUserController = async (request, response) => {
   const { id } = request.params

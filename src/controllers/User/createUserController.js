@@ -1,4 +1,4 @@
-import { createUserService, findUserByEmailService, hashPasswordService } from '../services/userService.js'
+import { createUserService, findUserByEmailService, hashPasswordService } from '../../services/userService.js'
 
 export const createUserController = async (request, response) => {
 
@@ -20,7 +20,7 @@ export const createUserController = async (request, response) => {
     username,
     senha: passwordHashed,
     gender,
-    email,
+    email: email.toLowerCase(),
     cargo
   }
 
