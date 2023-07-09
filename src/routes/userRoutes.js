@@ -1,17 +1,20 @@
 import { Router } from 'express'
 
-import { createUserController } from '../controllers/createUserController.js';
-import { findAllUserController } from '../controllers/findAllUsersController.js';
-import { deleteUserController } from '../controllers/deleteUserController.js';
-import { findUserController } from '../controllers/findUserController.js';
-import { updateUserController } from '../controllers/updateUserController.js';
+import { createUserController } from '../controllers/User/createUserController.js';
+import { findAllUserController } from '../controllers/User/findAllUsersController.js';
+import { deleteUserController } from '../controllers/User/deleteUserController.js';
+import { findUserController } from '../controllers/User/findUserController.js';
+import { updateUserController } from '../controllers/User/updateUserController.js';
+import { authMiddleware } from '../middlewares/authMiddleware.js';
 
-const route = Router()
+const userRoute = Router()
 
-route.get("/users", findAllUserController)
-route.get("/user/:id", findUserController)
-route.post("/user", createUserController)
-route.put("/user/:id", updateUserController)
-route.delete("/user/:id", deleteUserController)
+userRoute.get("/users", findAllUserController)
+userRoute.get("/user/:id", findUserController)
 
-export default route;
+userRoute.post("/user", createUserController)
+userRoute.put("/user/:id", authMiddleware, updateUserController)
+
+userRoute.delete("/user/:id", authMiddleware, deleteUserController)
+
+export default userRoute;
