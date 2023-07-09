@@ -17,6 +17,19 @@ model User {
   admin      Boolean?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  comments   Comments[]
 
   @@map("users")
+}
+
+model Comments {
+  id         String    @id @default(uuid()) 
+  post       String   
+  user       User   @relation(fields: [user_id], references: [id])
+  user_id    String
+  content    String 
+
+  @@map("comments")
+
+
 }
