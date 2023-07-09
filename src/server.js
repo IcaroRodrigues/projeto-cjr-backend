@@ -1,10 +1,12 @@
 import express from 'express'
 
-import route from './routes/userRoutes.js'
+import userRoute from './routes/userRoutes.js'
+import authRoute from './routes/authRoutes.js'
 
 const app = express()
 
 app.use(express.json())
-app.use("/", route)
+app.use('/', userRoute)
+app.use('/auth', authRoute)
 
-app.listen(3000, () => console.log("Server is running in port 3000..."))
+app.listen(3000, () => console.log('Server is running in port 3000...'))
