@@ -26,6 +26,10 @@ export const findUserByEmailService = (email) => {
   return prismaClient.user.findUnique({ where: { email } })
 }
 
+export const compareUserPassword = (password, userPassword) => {
+  return bcrypt.compare(password, userPassword)
+}
+
 export const hashPasswordService = (password) => {
   return bcrypt.hash(password, 10)
 }
