@@ -8,28 +8,40 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  username   String   @unique 
-  senha      String   
-  gender     String   
-  email      String   @unique 
-  cargo      String   
+  id         String     @id @default(uuid())
+  username   String     @unique
+  senha      String
+  gender     String
+  email      String     @unique
+  cargo      String
   admin      Boolean?
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+  posts      Post[]
   comments   Comments[]
 
   @@map("users")
 }
 
-model Comments {
-  id         String    @id @default(uuid()) 
-  post       String   
-  user       User   @relation(fields: [user_id], references: [id])
+model Post {
+  id         String     @id @default(uuid())
   user_id    String
-  content    String 
+  content    String
+  updated_at DateTime   @updatedAt
+  created_at DateTime   @default(now())
+  user       User       @relation(fields: [user_id], references: [id])
+  comments   Comments[]
+
+  @@map("posts")
+}
+
+model Comments {
+  id      String @id @default(uuid())
+  post_id String
+  user_id String
+  content String
+  user    User   @relation(fields: [user_id], references: [id])
+  post    Post   @relation(fields: [post_id], references: [id])
 
   @@map("comments")
-
-
 }
