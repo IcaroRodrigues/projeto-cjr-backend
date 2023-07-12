@@ -7,7 +7,7 @@ export const updateUserController = async (request, response) => {
     return response.json({ message: "Insira ao menos um campo para alterar." })
   }
 
-  const { id } = request.params
+  const id  = request.userId
 
   const user = await findUserByIdService(id)
   

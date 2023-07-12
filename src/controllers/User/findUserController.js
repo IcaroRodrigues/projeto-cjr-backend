@@ -1,15 +1,20 @@
 import { findUserByIdService } from '../../services/userService.js'
 
 export const findUserController = async (request, response) => {
-  const { id } = request.params
+  try {
+    const id = request.userId
 
-  const user = await findUserByIdService(id)
+    const user = await findUserByIdService(id)
 
-  if (!user) {
-    return response.json({ message: "Nenhum usuário encontrado." })
+    if (!user) {
+      return response.json({ message: "Nenhum usuário encontrado." })
+    }
+
+    delete user.senha
+
+    return response.json(user)
+  } catch (error) {
+    return response.json({ message: error.message })
   }
 
-  delete user.senha
-
-  return response.json(user)
 }
