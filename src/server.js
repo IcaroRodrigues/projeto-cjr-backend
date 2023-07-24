@@ -11,6 +11,6 @@ app.use(cors())
 app.use(express.json())
 app.use('/', userRoute)
 app.use('/auth', authRoute)
-app.use('/posts', postRoute) 
+app.use('/', postRoute) 
 
 app.listen(3000, () => console.log('Server is running in port 3000...'))
