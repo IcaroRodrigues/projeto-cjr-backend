@@ -40,6 +40,12 @@ export const hashPasswordService = (password) => {
   return bcrypt.hash(password, 10)
 }
 
+export const resetPasswordService = async (userId, newPassword) => {
+
+  const hashedPassword = await hashPasswordService(newPassword);
+  return prismaClient.user.update({ where: { id: userId }, data: { senha: hashedPassword } });
+}
+
 // Função para verificar se o usuário é um administrador
 const checkAdmin = async (userId) => {
   const user = await prismaClient.user.findUnique({ where: { id: userId } });
