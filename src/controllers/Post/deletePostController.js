@@ -1,11 +1,11 @@
-import { deletePostService, findPostService } from '../../services/postService.js';
+import { deletePostService, findPostByIdService } from '../../services/postService.js';
 
 export const deletePostController = async (request, response) => {
   try {
     const { id } = request.params;
     const user_id = request.userId;
 
-    const post = await findPostService(id);
+    const post = await findPostByIdService(id);
 
     if (!post) {
       return response.status(404).json({ message: 'Publicação não encontrada.' });
