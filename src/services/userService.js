@@ -41,7 +41,7 @@ export const hashPasswordService = (password) => {
 }
 
 // Função para verificar se o usuário é um administrador
-const isAdmin = async (userId) => {
+const checkAdmin = async (userId) => {
   const user = await prismaClient.user.findUnique({ where: { id: userId } });
   return user.admin === true;
 };
