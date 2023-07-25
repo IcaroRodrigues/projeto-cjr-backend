@@ -1,16 +1,19 @@
-import { deletePostService } from '../../services/postService.js';
+import { deletePostService, findPostService } from '../../services/postService.js';
 
 export const deletePostController = async (request, response) => {
   try {
     const { id } = request.params;
+    const user_id = request.userId;
 
-    const deletedPost = await deletePostService(id);
+    const post = await findPostService(id);
 
-    if (!deletedPost) {
-      return response.status(404).json({ message: 'Post não encontrado.' });
+    if (!post) {
+      return response.status(404).json({ message: 'Publicação não encontrada.' });
     }
 
-    return response.json({ message: 'Post excluído com sucesso.' });
+    await deletePostService(id, user_id);
+
+    return response.json({ message: 'Publicação excluída com sucesso!' });
   } catch (error) {
     return response.status(500).json({ message: error.message });
   }
