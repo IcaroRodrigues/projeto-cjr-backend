@@ -11,7 +11,13 @@ export const updateUserService = (id, data) => {
 }
 
 export const deleteUserByIdService = (id) => {
-  return prismaClient.user.delete({ where: { id } })
+  const isAdmin = checkAdmin(id);
+
+  if (!isAdmin) {
+    throw new Error('Você não tem permissão para excluir uma conta de usuário.');
+  }
+
+  return prismaClient.user.delete({ where: { id } });
 }
 
 export const findAllUsersService = () => {
@@ -33,3 +39,9 @@ export const compareUserPassword = (password, userPassword) => {
 export const hashPasswordService = (password) => {
   return bcrypt.hash(password, 10)
 }
+
+// Função para verificar se o usuário é um administrador
+const isAdmin = async (userId) => {
+  const user = await prismaClient.user.findUnique({ where: { id: userId } });
+  return user.admin === true;
+};
